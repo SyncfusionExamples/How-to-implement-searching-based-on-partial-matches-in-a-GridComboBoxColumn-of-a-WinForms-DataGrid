@@ -51,6 +51,6 @@ public class GridCellComboBoxRendererExt : GridComboBoxCellRenderer
 }
  ```
 
- ![Partial search for GridComboBoxColumn](GridComboBoxColumnPartialSearch.GIF)
+![Partial search for GridComboBoxColumn](GridComboBoxColumnPartialSearch.gif)
 
 Take a moment to peruse the [WinForms DataGrid - Column Renderer](https://help.syncfusion.com/windowsforms/datagrid/columntypes#customize-column-renderer) documentation, to learn more about column renderer with examples.
