@@ -7,7 +7,7 @@ The **OnInitializeEditElement** method is overridden in the custom renderer. Aft
 In the event handler, the ComboBox view is filtered based on the input text, using the **Contains** method to match partial entries.
  
  ```csharp
-// Remove the old Renderer
+// Remove the existing Renderer
 sfDataGrid1.CellRenderers.Remove("ComboBox");
 
 // Add the custom Renderer

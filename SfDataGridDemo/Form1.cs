@@ -41,7 +41,7 @@ namespace SfDataGridDemo
                 DropDownStyle = DropDownStyle.DropDown
             });
 
-            // Remove the old Renderer
+            // Remove the existing Renderer
             sfDataGrid1.CellRenderers.Remove("ComboBox");
 
             // Add the custom Renderer
