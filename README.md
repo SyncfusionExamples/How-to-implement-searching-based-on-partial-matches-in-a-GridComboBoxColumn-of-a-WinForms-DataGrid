@@ -1,14 +1,16 @@
-# How to implement searching based on partial matches in a GridComboBoxColumn of a WinForms DataGrid (SfDataGrid)
+# How to implement searching based on partial matches in a GridComboBoxColumn of a WinForms DataGrid?
 
 In [WinForms DataGrid](https://www.syncfusion.com/winforms-ui-controls/datagrid) (SfDataGrid), partial search functionality in the [GridComboBoxColumn](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.GridComboBoxColumn.html) can be implemented by overriding the [GridComboBoxCellRenderer](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Renderers.GridComboBoxCellRenderer.html).
 
-Within this custom renderer, the OnInitializeEditElement method should be overridden. After invoking the base method, the [TextChanged](https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.textchanged?view=windowsdesktop-9.0&redirectedfrom=MSDN) event of the [WinForms ComboBox](https://www.syncfusion.com/winforms-ui-controls/combobox) (SfComboBox) must be hooked, as **ComboBox** serves as the edit element in the GridComboBoxColumn. In this event handler, a filter can be applied to the view of the ComboBox based on the text entered.
+The **OnInitializeEditElement** method is overridden in the custom renderer. After invoking the base method, the **TextChanged** event of the [WinForms ComboBox](https://www.syncfusion.com/winforms-ui-controls/combobox) (SfComboBox) is hooked, as **ComboBox** acts as the edit element in the GridComboBoxColumn. 
 
-Filtering is performed using the **Contains** method. The filtering logic can be customized according to specific requirements.
+In the event handler, the ComboBox view is filtered based on the input text, using the **Contains** method to match partial entries.
  
  ```csharp
-//Renderer subscription
+// Remove the old Renderer
 sfDataGrid1.CellRenderers.Remove("ComboBox");
+
+// Add the custom Renderer
 sfDataGrid1.CellRenderers.Add("ComboBox", new GridCellComboBoxRendererExt());
 
 //Renderer customization
@@ -22,7 +24,9 @@ public class GridCellComboBoxRendererExt : GridComboBoxCellRenderer
         base.OnInitializeEditElement(column, rowColumnIndex, uiElement);
         uiElement.TextChanged += UiElement_TextChanged;
     }
+
     string filteredText;
+
     private void UiElement_TextChanged(object sender, EventArgs e)
     {
         var comboBox = sender as SfComboBox;
@@ -33,6 +37,7 @@ public class GridCellComboBoxRendererExt : GridComboBoxCellRenderer
             comboBox.DropDownListView.View.RefreshFilter();
         } 
     }
+    
     private bool FilterItem(object data)
     {
         if (data != null)
@@ -48,4 +53,4 @@ public class GridCellComboBoxRendererExt : GridComboBoxCellRenderer
 
  ![Partial search for GridComboBoxColumn](GridComboBoxColumnPartialSearch.GIF)
 
-Take a moment to peruse the [WinForms DataGrid - Column Renderer](https://help.syncfusion.com/windowsforms/datagrid/columntypes#customize-column-renderer) documentation, to learn more about DataGrid column renderer with examples.
+Take a moment to peruse the [WinForms DataGrid - Column Renderer](https://help.syncfusion.com/windowsforms/datagrid/columntypes#customize-column-renderer) documentation, to learn more about column renderer with examples.

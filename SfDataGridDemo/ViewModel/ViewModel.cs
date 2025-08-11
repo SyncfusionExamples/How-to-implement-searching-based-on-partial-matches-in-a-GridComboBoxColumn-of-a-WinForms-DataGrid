@@ -9,25 +9,22 @@ using System.Threading.Tasks;
 
 namespace SfDataGridDemo
 {
-    public class OrderInfoCollection : INotifyPropertyChanged
+    public class OrderInfoCollection
     {
         private ObservableCollection<OrderInfo> _orders;
+
         public ObservableCollection<OrderInfo> Orders
         {
             get { return _orders; }
-            set { _orders = value; OnPropertyChanged("Orders"); }
+            set { _orders = value;}
         }
+
         public OrderInfoCollection()
         {
             _orders = new ObservableCollection<OrderInfo>();
             this.GenerateOrders();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+
         private void GenerateOrders()
         {
             _orders.Add(new OrderInfo(1001, "Maria Anders", "Germany", "ALFKI", "Berlin"));

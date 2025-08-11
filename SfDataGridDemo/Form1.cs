@@ -2,6 +2,7 @@
 using Syncfusion.WinForms.DataGrid.Renderers;
 using Syncfusion.WinForms.GridCommon.ScrollAxis;
 using Syncfusion.WinForms.ListView;
+using Syncfusion.WinForms.ListView.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,13 +13,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Forms;
-using static System.Windows.Forms.AxHost;
 
 namespace SfDataGridDemo
 {
     public partial class Form1 : Form
     {
         public OrderInfoCollection collections;
+
         public Form1()
         {
             InitializeComponent();
@@ -37,11 +38,13 @@ namespace SfDataGridDemo
                 ValueMember = "CustomerName",
                 Width = 200,
                 DataSource = collections.Orders,
-                DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDown
+                DropDownStyle = DropDownStyle.DropDown
             });
 
-            //Renderer subscription
+            // Remove the old Renderer
             sfDataGrid1.CellRenderers.Remove("ComboBox");
+
+            // Add the custom Renderer
             sfDataGrid1.CellRenderers.Add("ComboBox", new GridCellComboBoxRendererExt());
         }
     }
@@ -57,7 +60,9 @@ namespace SfDataGridDemo
             base.OnInitializeEditElement(column, rowColumnIndex, uiElement);
             uiElement.TextChanged += UiElement_TextChanged;
         }
+
         string filteredText;
+
         private void UiElement_TextChanged(object sender, EventArgs e)
         {
             var comboBox = sender as SfComboBox;
@@ -68,6 +73,7 @@ namespace SfDataGridDemo
                 comboBox.DropDownListView.View.RefreshFilter();
             } 
         }
+
         private bool FilterItem(object data)
         {
             if (data != null)

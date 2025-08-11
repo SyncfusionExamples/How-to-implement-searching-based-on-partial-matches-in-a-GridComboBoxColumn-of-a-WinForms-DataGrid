@@ -25,25 +25,30 @@ namespace SfDataGridDemo
             get { return customerId; }
             set { customerId = value; OnPropertyChanged("CustomerID"); }
         }
+
         public string CustomerName
         {
             get { return customerName; }
             set { customerName = value; OnPropertyChanged("CustomerName"); }
         }
+
         public string Country
         {
             get { return country; }
             set { country = value; OnPropertyChanged("Country"); }
         }
+
         public string ShipCity
         {
             get { return shippingCity; }
             set { shippingCity = value; OnPropertyChanged("ShipCity"); }
         }
+
         public OrderInfo()
         {
 
         }
+
         public OrderInfo(int orderId, string customerName, string country, string customerId, string shipCity)
         {
             this.OrderID = orderId;
@@ -54,6 +59,7 @@ namespace SfDataGridDemo
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
