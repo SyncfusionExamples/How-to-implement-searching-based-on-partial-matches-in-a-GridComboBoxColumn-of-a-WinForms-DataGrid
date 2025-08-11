@@ -20,6 +20,7 @@ namespace SfDataGridDemo
             get { return orderID; }
             set { orderID = value; OnPropertyChanged("OrderID"); }
         }
+
         public string CustomerID
         {
             get { return customerId; }
